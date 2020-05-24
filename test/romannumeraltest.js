@@ -1,55 +1,34 @@
-const chai = require('chai');
-const chaiHttp = require('chai-http');
+const assert = require('assert');
+const { expect } = require('chai');
 
-const app = require('../app');
+const convertToRoman = require('../service/romannumeral');
 
-// Configure chai
-chai.use(chaiHttp);
-chai.should();
+describe('convertToRoman', () => {
+  // Test function returns correct value for single digits
+  it('should return for digits', () => {
+    expect(convertToRoman(1)).eq('I');
+    expect(convertToRoman(2)).eq('II');
+    expect(convertToRoman(3)).eq('III');
+    expect(convertToRoman(4)).eq('IV');
+    expect(convertToRoman(5)).eq('V');
+    expect(convertToRoman(6)).eq('VI');
+    expect(convertToRoman(7)).eq('VII');
+    expect(convertToRoman(8)).eq('VIII');
+    expect(convertToRoman(9)).eq('IX');
+    expect(convertToRoman(10)).eq('X');
+  });
 
-describe('RomanNumeral', () => {
-  describe('GET', () => {
-    // Test on home page
-    it('should return home page', (done) => {
-      chai.request(app)
-        .get('/')
-        .end(((err, res) => {
-          res.should.have.status(200);
-          res.body.should.be.a('object');
-          done();
-        }));
-    });
+  it('should return for roman symbols', () => {
+    expect(convertToRoman(50)).eq('L');
+    expect(convertToRoman(100)).eq('C');
+  });
 
-    // Test existence of '/romannumeral' path
-    it('should return on correct query', (done) => {
-      chai.request(app)
-        .get('/romannumeral?query=49')
-        .end((((err, res) => {
-          res.should.have.status(200);
-          res.body.should.be.a('object');
-          done();
-        })));
-    });
-
-    // Test error of wrong query parameters
-    it('should return 400 error on invalid query parameters', () => {
-      chai.request(app)
-        .get('/romannumeral')
-        .end((((err, res) => {
-          res.should.have.status(400);
-        })));
-
-      chai.request(app)
-        .get('/romannumeral?query=abc')
-        .end((((err, res) => {
-          res.should.have.status(400);
-        })));
-
-      chai.request(app)
-        .get('/romannumeral?query=12222222')
-        .end((((err, res) => {
-          res.should.have.status(400);
-        })));
-    });
+  it('should return for random values', () => {
+    expect(convertToRoman(27)).eq('XXVII');
+    expect(convertToRoman(49)).eq('XLIX');
+    expect(convertToRoman(123)).eq('CXXIII');
+    expect(convertToRoman(192)).eq('CXCII');
+    expect(convertToRoman(551)).eq('DLI');
+    expect(convertToRoman(2786)).eq('MMDCCLXXXVI');
   });
 });

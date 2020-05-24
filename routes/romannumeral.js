@@ -1,5 +1,7 @@
 const express = require('express');
-const createError = require('http-errors')
+const createError = require('http-errors');
+
+const convertToRoman = require('../service/romannumeral');
 
 const router = express.Router();
 
@@ -21,7 +23,7 @@ router.get('/', (req, res) => {
     throw createError(400, `Value: ${num} is out of range ${LOWER_BOUND}-${UPPER_BOUND}`);
   }
 
-  res.send(`Convert to roman numeral: ${num}`);
+  res.send(convertToRoman(value));
 });
 
 module.exports = router;
