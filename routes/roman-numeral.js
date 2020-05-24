@@ -1,7 +1,7 @@
 const express = require('express');
 const createError = require('http-errors');
 
-const convertToRoman = require('../service/romannumeral');
+const { convertToRoman, UPPER_BOUND, LOWER_BOUND } = require('../service/roman-numeral');
 
 const router = express.Router();
 
@@ -17,8 +17,6 @@ router.get('/', (req, res) => {
     throw createError(400, 'Invalid value for \'query\' key in query string');
   }
 
-  const LOWER_BOUND = 1;
-  const UPPER_BOUND = 3999;
   if (num < LOWER_BOUND || num > UPPER_BOUND) {
     throw createError(400, `Value: ${num} is out of range ${LOWER_BOUND}-${UPPER_BOUND}`);
   }

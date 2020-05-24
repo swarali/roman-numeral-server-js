@@ -1,7 +1,8 @@
 const assert = require('assert');
 const { expect } = require('chai');
+const { describe, it } = require('mocha');
 
-const convertToRoman = require('../service/romannumeral');
+const { convertToRoman } = require('../service/roman-numeral');
 
 describe('convertToRoman', () => {
   // Test function returns correct value for single digits
