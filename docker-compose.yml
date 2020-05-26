@@ -1,0 +1,18 @@
+version: '3'
+services:
+  dev-app:
+    build:
+      context: .
+    image: dev
+    command: ["yarn", "run", "dev"]
+    environment:
+      - NODE_ENV=development
+    ports:
+    - '8080:8080'
+    volumes:
+    - .:/usr/node_app/app
+    # this is workaround to prevent host node_modules from accidentally getting
+    # mounted inside the container
+    - notused:/usr/node_app/app/node_modules
+volumes:
+  notused:
