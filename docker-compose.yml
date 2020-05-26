@@ -9,6 +9,11 @@ services:
       - NODE_ENV=development
     ports:
     - '8080:8080'
+    healthcheck:
+      test: curl --fail -s http://localhost:8080 || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 3
     volumes:
     - .:/usr/node_app/app
     # this is workaround to prevent host node_modules from accidentally getting

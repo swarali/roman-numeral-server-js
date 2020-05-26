@@ -1,6 +1,8 @@
 # ---------- Base ----------
 FROM node:12-alpine AS base
 
+RUN apk --no-cache add curl
+
 RUN mkdir /usr/node_app && chown node:node /usr/node_app
 
 WORKDIR /usr/node_app

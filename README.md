@@ -53,3 +53,9 @@ Tests:
 ```bash
 $ docker-compose run dev-app yarn test
 ```
+
+Health-check
+==
+```bash
+$ docker inspect <container-name> --format='{{json .State.Health}}'
+```
