@@ -3,7 +3,7 @@ Roman Numeral Server in NodeJS
 A simple NodeJS webapp that returns roman numeral value on query.
 
 HTTP Server built using [ExpressJS](https://github.com/expressjs/express).
-Roman numeral conversion as per Wikipedia page: [Roman numerals](https://en.wikipedia.org/wiki/Roman_numerals). 
+Roman numeral conversion as per Wikipedia page: [Roman numerals](https://en.wikipedia.org/wiki/Roman_numerals).
 
 [Yarn](https://github.com/yarnpkg/yarn) for building.
 
@@ -17,12 +17,13 @@ Prerequisites
 Run server in production
 ==
 ```bash
-$ yarn prod_win // yarn prod_nix
+$ NODE_ENV=production # set NODE_ENV=production (in Windows)
+$ yarn run start
 ```
 
 Run server in development mode
 ==
-For server
+Run server with nodemon to reload server on new changes to the source
 ```bash
 $ yarn run dev
 ```
@@ -36,4 +37,19 @@ Test
 ==
 ```bash
 $ yarn test
+```
+
+With Docker
+==
+Server in prod:
+```bash
+$ docker-compose -f docker-compose.prod.yml up
+```
+Server in dev:
+```bash
+$ docker-compose up
+```
+Tests:
+```bash
+$ docker-compose run dev-app yarn test
 ```
