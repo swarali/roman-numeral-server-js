@@ -3,11 +3,15 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const promBundle = require("express-prom-bundle");
 
 const indexRouter = require('./routes/index');
 const romanNumeralRouter = require('./routes/roman-numeral');
 
 const app = express();
+// set metrics middleware
+const metricsMiddleware = promBundle({includeMethod: true});
+app.use(metricsMiddleware);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -59,3 +59,11 @@ Health-check
 ```bash
 $ docker inspect <container-name> --format='{{json .State.Health}}'
 ```
+
+Logs, Metrics, Monitoring
+==
+Logs printed to host syslog
+
+Metric exposed on localhost:8080/metrics via [express-prom-bundle](https://github.com/jochen-schweizer/express-prom-bundle)
+
+Monitoring can be added through this exporter by using Prometheus/Grafana
